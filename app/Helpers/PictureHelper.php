@@ -10,9 +10,9 @@ class PictureHelper
 {
     /**
      * @param $path
-     * @return void
+     * @return string
      */
-    public static function getExistImage($path): ?string
+    public static function getExistImage($path): string
     {
         $pathArr = explode('/', $path);
         $existImage = $pathArr[count($pathArr) - 1];

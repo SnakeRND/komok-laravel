@@ -9,7 +9,15 @@ use Intervention\Image\Facades\Image;
 
 class ResizeService
 {
-    public static function resize($path, $resizeDisk, $width, $height, $encode = 'jpg')
+    /**
+     * @param $path
+     * @param $resizeDisk
+     * @param $width
+     * @param $height
+     * @param string $encode
+     * @return string
+     */
+    public static function resize($path, $resizeDisk, $width, $height, string $encode = 'jpg'): string
     {
         $pathArr = explode('/', $path);
         $existImage = $pathArr[count($pathArr) - 1];

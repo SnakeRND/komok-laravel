@@ -6,10 +6,16 @@ use App\Helpers\PictureHelper;
 use App\Models\Employee;
 use App\Models\TeamBlock;
 use App\Services\ResizeService;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Storage;
 
 class TeamController extends LayoutController
 {
+    /**
+     * @return Application|Factory|View
+     */
     public function index()
     {
         $data['blocks_on_team'] = TeamBlock::all()->keyBy('id');
