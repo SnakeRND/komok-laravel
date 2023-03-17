@@ -1,0 +1,51 @@
+version: '3.3'
+
+services:
+
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/nginx.dockerfile
+    container_name: komok-nginx
+    volumes:
+      - ./:/var/www/komok
+    ports:
+      - 127.0.0.1:8080:80
+    links:
+      - php
+
+  php:
+    user: "${UID}:${GID}"
+    build:
+      context: .
+      dockerfile: docker/php-fpm.dockerfile
+    container_name: komok-php
+    volumes:
+      - ./:/var/www/komok
+      - ./docker/php-ini:/usr/local/etc/php/custom.d
+    environment:
+      PHP_INI_SCAN_DIR: "/usr/local/etc/php/custom.d:/usr/local/etc/php/conf.d"
+    links:
+      - mysql
+
+  mysql:
+    platform: linux/x86_64
+    build:
+      context: .
+      dockerfile: docker/mysql.dockerfile
+    container_name: komok-mysql
+    volumes:
+      - ./Makefile:/Makefile
+      - ./dump:/dump
+    ports:
+      - 127.0.0.1:53307:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=komok_db
+
+  mailcatcher:
+      image: yappabe/mailcatcher
+      container_name: komok-mailcatcher
+      ports:
+          - 127.0.0.1:1025:1025
+          - 127.0.0.1:1080:1080

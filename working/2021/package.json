@@ -1,0 +1,75 @@
+{
+  "name": "cetera-wireframe-boilerplate",
+  "version": "4.0.0",
+  "main": "./src/js/app.js",
+  "description": "Шаблон прототипов на фреймворке Foundation в компании Cetera Labs",
+  "dependencies": {
+    "@babel/core": "^7.15.8",
+    "@fancyapps/fancybox": "~3.5.7",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-brands-svg-icons": "^5.15.4",
+    "@fortawesome/free-regular-svg-icons": "^5.15.4",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "foundation-sites": "^6.7.3",
+    "jquery": "^3.6.0",
+    "motion-ui": "^2.0.3",
+    "postcss": "^8.3.11",
+    "slick-carousel": "^1.8.1",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.7.4"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.15.8",
+    "autoprefixer": "^10.3.7",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.3",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^9.0.1",
+    "css-loader": "^6.4.0",
+    "eslint": "^8.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-json": "^3.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "file-loader": "^6.2.0",
+    "fs": "0.0.2",
+    "html-webpack-plugin": "^5.5.0",
+    "husky": "^7.0.4",
+    "imagemin-mozjpeg": "^9.0.0",
+    "imagemin-webpack-plugin": "^2.4.2",
+    "import-glob": "^1.5.0",
+    "lint-staged": "^11.2.5",
+    "mini-css-extract-plugin": "^2.4.3",
+    "node-sass": "^6.0.1",
+    "postcss-loader": "^6.2.0",
+    "postcss-scss": "^4.0.1",
+    "prettier": "^2.4.1",
+    "pug-html-loader": "^1.1.5",
+    "raw-loader": "^4.0.2",
+    "sass-loader": "^12.2.0",
+    "stylelint": "^14.0.0",
+    "stylelint-config-standard": "^23.0.0",
+    "webpack": "^5.60.0"
+  },
+  "scripts": {
+    "start": "webpack serve --mode development  --config webpack.config.js --env development",
+    "minify": "webpack --mode production --config webpack.config.js",
+    "lint-prod": "eslint ./src/**/*.js --fix && stylelint ./src/**/*.scss --fix"
+  },
+  "standard": {
+    "globals": [
+      "jQuery",
+      "Foundation"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@gitlab.cetera.ru:6022/boilerplate/wireframe"
+  },
+  "keywords": [
+    "cetera",
+    "webpack",
+    "frontend"
+  ],
+  "author": "Denis Sakharov <d.sakharov@ceteralabs.com> (http://cetera.ru/)",
+  "license": "UNLICENSED"
+}
