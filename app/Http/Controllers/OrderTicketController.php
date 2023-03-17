@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\OrderTicket;
 use App\Models\Setting;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Validator;
 
 class OrderTicketController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $validator = Validator::make($request->all(), [
             'name' => ['required'],
