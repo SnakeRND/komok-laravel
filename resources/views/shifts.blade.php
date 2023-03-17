@@ -66,7 +66,7 @@
                                                 <div class="grid-x">
                                                     <div class="cell">
                                                         <div>
-                                                            <h3>{{ $program->title }}</h3>
+                                                            <h3 id="program-name">{{ $program->title }}</h3>
                                                             <p>{!! $program->description !!}</p>
                                                         </div>
                                                     </div>
@@ -74,7 +74,7 @@
                                                         @foreach($period->programs as $program)
                                                         <div class="tabs-title {{ $loop->first ? 'is-active' : '' }} tabs-title_program">
                                                             <div>
-                                                                <a href="#second{{$period->id}}v{{$program->id}}">{{ $program->title }}</a>
+                                                                <a class="program-link" href="#second{{$period->id}}v{{$program->id}}">{{ $program->title }}</a>
                                                             </div>
                                                         </div>
                                                         @endforeach
@@ -153,7 +153,7 @@
                                                             @endif
                                                         </div>
                                                         <div>
-                                                            <a class="button" data-open="exampleModalform{{$period->id}}" aria-controls="exampleModalform{{$period->id}}" aria-haspopup="dialog" tabindex="0">
+                                                            <a class="button exampleModalform" data-open="exampleModalform{{$period->id}}" aria-controls="exampleModalform{{$period->id}}" aria-haspopup="dialog" tabindex="0">
                                                                 Купить путевку
                                                             </a>
                                                         </div>
@@ -240,6 +240,12 @@
                                                                     type="hidden"
                                                                     name="shift"
                                                                     value="{{ request()->get('age') === 'younger' ? '7-12 лет' : '13-17 лет' }} {{$period->title}} {{$period->period}}"
+                                                                />
+                                                                <input
+                                                                    id="program-input"
+                                                                    type="hidden"
+                                                                    name="program"
+                                                                    value="{{$program->title}}"
                                                                 />
                                                             </form>
                                                         </div>
@@ -478,4 +484,16 @@
         <? endif; ?>
     @endforeach
 
+    <script>
+        const programInput = document.getElementById('program-input')
+        const programs = document.getElementsByClassName('program-link')
+
+        programInput.value = document.getElementById('program-name').innerHTML
+
+        for (let i = 0 ; i < programs.length; i++) {
+            programs[i].addEventListener('click' , function () {
+                programInput.value = this.innerHTML
+            }) ;
+        }
+    </script>
 @endsection
