@@ -90,18 +90,21 @@ class ShiftsController extends LayoutController
 
             $item->employees->each(function ($employee) {
                 if (Storage::disk('public')->exists($employee->picture)) {
-                    if ($employee->is_new) {
+                    $existImage = PictureHelper::getExistImage($employee->picture);
+                    $picturePath = 'resize/' . $existImage . '.jpg';
+
+                    if (Storage::disk('public')->exists($picturePath)) {
+                        $existImage = PictureHelper::getExistImage($employee->picture);
+                        $employee->picture = 'resize/' . $existImage . '.jpg';
+                    } else {
                         $employee->picture = ResizeService::resize(
-                        Storage::path('public/' . $employee->picture),
-                        'public',
-                        128,
-                        128
+                            Storage::path('public/' . $employee->picture),
+                            'public',
+                            128,
+                            128
                         );
                         $employee->is_new = false;
                         $employee->save();
-                    } else {
-                        $existImage = PictureHelper::getExistImage($employee->picture);
-                        $employee->picture = 'resize/' . $existImage . '.jpg';
                     }
                 }
             });

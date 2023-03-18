@@ -28,7 +28,13 @@ class TeamController extends LayoutController
 
             $item->employees->each(function($employee) {
                 if (Storage::disk('public')->exists($employee->picture)) {
-                    if ($employee->is_new) {
+                    $existImage = PictureHelper::getExistImage($employee->picture);
+                    $picturePath = 'resize/' . $existImage . '.jpg';
+
+                    if (Storage::disk('public')->exists($picturePath)) {
+                        $existImage = PictureHelper::getExistImage($employee->picture);
+                        $employee->picture = 'resize/' . $existImage . '.jpg';
+                    } else {
                         $employee->picture = ResizeService::resize(
                             Storage::path('public/' . $employee->picture),
                             'public',
@@ -37,9 +43,6 @@ class TeamController extends LayoutController
                         );
                         $employee->is_new = false;
                         $employee->save();
-                    } else {
-                        $existImage = PictureHelper::getExistImage($employee->picture);
-                        $employee->picture = 'resize/' . $existImage . '.jpg';
                     }
                 }
             });
