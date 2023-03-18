@@ -41,8 +41,6 @@ class TeamController extends LayoutController
                             128,
                             128
                         );
-                        $employee->is_new = false;
-                        $employee->save();
                     }
                 }
             });

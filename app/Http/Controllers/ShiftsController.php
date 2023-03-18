@@ -103,8 +103,6 @@ class ShiftsController extends LayoutController
                             128,
                             128
                         );
-                        $employee->is_new = false;
-                        $employee->save();
                     }
                 }
             });
@@ -121,6 +119,7 @@ class ShiftsController extends LayoutController
                 $pictures = $pictures->random(10);
             }
         } else {
+            $pictures = $gallery->getShiftImages();
             $pictures = $pictures->filter(function ($item) {
                 return explode('/', $item)[1] === 'Смены 13-17 лет';
             });
