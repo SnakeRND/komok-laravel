@@ -14,9 +14,9 @@ class GalleryService
 
     /**
      * @param array $filter
-     * @return array|LengthAwarePaginator
+     * @return LengthAwarePaginator
      */
-    public function getList($filter = [])
+    public function getList(array $filter = []): LengthAwarePaginator
     {
         $tree = DirectoryHelper::makeTree(storage_path('app/public') . self::GALLERY_ROOT);
         $result = [];
