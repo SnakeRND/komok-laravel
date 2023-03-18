@@ -32,8 +32,7 @@ class GalleryService
             return new LengthAwarePaginator($result, count($result), 7);
         }
 
-        foreach ($tree[$filter['age']][$filter['year']][$filter['season']][$filter['shift']] as $picName)
-        {
+        foreach ($tree[$filter['age']][$filter['year']][$filter['season']][$filter['shift']] as $picName) {
             $result[] = self::GALLERY_ROOT . '/'
                 . $filter['age']
                 . '/'
@@ -47,7 +46,6 @@ class GalleryService
         }
 
         return new LengthAwarePaginator($result, count($result), 7);
-
     }
 
     /**

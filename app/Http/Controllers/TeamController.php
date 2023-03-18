@@ -20,13 +20,14 @@ class TeamController extends LayoutController
     {
         $data['blocks_on_team'] = TeamBlock::all()->keyBy('id');
 
-        $data['blocks_on_team']->each(function($item) {
-            if ($item->emphasized_text)
+        $data['blocks_on_team']->each(function ($item) {
+            if ($item->emphasized_text) {
                 $item->headline = str_replace($item->emphasized_text, '', $item->headline);
+            }
 
             $item->employees = Employee::query()->whereIn('id', json_decode($item->employees, true))->get();
 
-            $item->employees->each(function($employee) {
+            $item->employees->each(function ($employee) {
                 if (Storage::disk('public')->exists($employee->picture)) {
                     $existImage = PictureHelper::getExistImage($employee->picture);
                     $picturePath = 'resize/' . $existImage . '.jpg';
@@ -48,7 +49,7 @@ class TeamController extends LayoutController
 
         return view('team', [
             'blocks_on_team' => $data['blocks_on_team'],
-            'settings'=> $this->getLayoutSettings(),
+            'settings' => $this->getLayoutSettings(),
             'meta' => $this->getMeta()
         ]);
     }
