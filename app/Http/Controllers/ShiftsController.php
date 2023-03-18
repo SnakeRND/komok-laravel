@@ -130,12 +130,20 @@ class ShiftsController extends LayoutController
 
         $pictures = $pictures->map(function ($picture) {
             if (Storage::disk('public')->exists($picture)) {
-                $picture = ResizeService::resize(
-                    Storage::path('public/' . $picture),
-                    'public',
-                    470,
-                    313
-                );
+                $existImage = PictureHelper::getExistImage($picture);
+                $picturePath = 'resize/' . $existImage . '.jpg';
+
+                if (Storage::disk('public')->exists($picturePath)) {
+                    $existImage = PictureHelper::getExistImage($picture);
+                    $picture = 'resize/' . $existImage . '.jpg';
+                } else {
+                    $picture = ResizeService::resize(
+                        Storage::path('public/' . $picture),
+                        'public',
+                        470,
+                        313
+                    );
+                }
             }
             return $picture;
         });
