@@ -18,6 +18,7 @@
     <link rel="shortcut icon" href="{{ asset('images/favicon/favicon.ico') }}">
     <meta name="theme-color" content="#5f4b8b">
     <script defer="defer" src="{{ asset('js/main.js') }}"></script>
+    <script defer="defer" src="{{ asset('js/shifts.js') }}"></script>
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body>

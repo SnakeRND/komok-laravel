@@ -37,7 +37,7 @@
                     <div class="vertical tabs" id="example-tabs" data-responsive-accordion-tabs="accordion medium-tabs"
                          data-multi-expand="true" data-allow-all-closed="true" data-deep-link="true" data-update-history="false">
                         @foreach($shifts_period as $index => $period)
-                        <div class="tabs-title {{ $loop->first ? 'is-active' : '' }} elements">
+                        <div class="tabs-title side-tabs {{ $loop->first ? 'is-active' : '' }} elements">
                             <a href="#panel{{$period->id}}v" aria-selected="true">
                                 {{$period->title}}
                                 <div class="tabs__subtitle">{{$period->period}}</div>
@@ -74,7 +74,7 @@
                                                         @foreach($period->programs as $program)
                                                         <div class="tabs-title {{ $loop->first ? 'is-active' : '' }} tabs-title_program">
                                                             <div>
-                                                                <a class="program-link" href="#second{{$period->id}}v{{$program->id}}">{{ $program->title }}</a>
+                                                                <a id="{{$period->id}}" class="program-link" href="#second{{$period->id}}v{{$program->id}}">{{ $program->title }}</a>
                                                             </div>
                                                         </div>
                                                         @endforeach
@@ -327,7 +327,7 @@
         <div class="grid-container">
             <div class="card__slider" id="counselors">
                 @foreach($elders as $elder)
-                <? if ($elder["is_public"]): ?>
+                    <?php if ($elder["is_public"]): ?>
                 <div class="card__item card__item_slider">
                     <div class="card__img">
                         <img class="card__photo" src="{{ asset('storage/' . $elder->picture) }}">
@@ -340,7 +340,7 @@
                         <a class="button" data-open="TeamModal{{ $elder->id }}">Познакомиться</a>
                     </div>
                 </div>
-                <? endif; ?>
+                    <?php endif; ?>
                 @endforeach
             </div>
         </div>
@@ -356,7 +356,7 @@
         <div class="grid-container">
             <div class="card__slider" id="counselors-second">
                 @foreach($employees->employees as $employee)
-                <? if ($employee["is_public"]): ?>
+                    <?php if ($employee["is_public"]): ?>
                 <div class="card__item card__item_slider">
                     <div class="card__img">
                         <img class="card__photo" src="{{ asset('storage/' . $employee->picture) }}">
@@ -373,7 +373,7 @@
 
 
 
-                <? endif; ?>
+                    <?php endif; ?>
                 @endforeach
             </div>
         </div>
@@ -434,7 +434,7 @@
         </button>
     </div>
     @foreach($employees->employees as $employee)
-            <? if ($employee["is_public"]): ?>
+        <?php if ($employee["is_public"]): ?>
             <div id="TeamModal{{ $employee->id }}" class="reveal medium" data-reveal="" data-animation-in="spin-in" data-animation-out="spin-out">
                 <div class="person">
                     <div class="person__header h1">
@@ -456,10 +456,10 @@
 
                 </div>
             </div>
-        <? endif; ?>
+        <?php endif; ?>
     @endforeach
     @foreach($elders as $elder)
-            <? if ($elder["is_public"]): ?>
+        <?php if ($elder["is_public"]): ?>
             <div id="TeamModal{{ $elder->id }}" class="reveal medium" data-reveal="" data-animation-in="spin-in" data-animation-out="spin-out">
                 <div class="person">
                     <div class="person__header h1">
@@ -481,26 +481,7 @@
 
                 </div>
             </div>
-        <? endif; ?>
+        <?php endif; ?>
     @endforeach
 
-    <script>
-        const programInput = document.getElementById('program-input')
-        const programs = document.getElementsByClassName('program-link')
-        const tabs = document.getElementsByClassName('tabs-title')
-        const tabsPanels = document.getElementsByClassName('tabs-panel')
-
-        programInput.value = cutHtmlTags(document.getElementById('program-name').innerHTML)
-
-        for (let i = 0 ; i < programs.length; i++) {
-            programs[i].addEventListener('click' , function () {
-                programInput.value = cutHtmlTags(this.innerHTML)
-            }) ;
-        }
-
-        function cutHtmlTags(str) {
-            const regex = /(|<([^>]+)>)/ig;
-            return str.replace(regex, "");
-        }
-    </script>
 @endsection
