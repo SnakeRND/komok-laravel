@@ -487,13 +487,20 @@
     <script>
         const programInput = document.getElementById('program-input')
         const programs = document.getElementsByClassName('program-link')
+        const tabs = document.getElementsByClassName('tabs-title')
+        const tabsPanels = document.getElementsByClassName('tabs-panel')
 
-        programInput.value = document.getElementById('program-name').innerHTML
+        programInput.value = cutHtmlTags(document.getElementById('program-name').innerHTML)
 
         for (let i = 0 ; i < programs.length; i++) {
             programs[i].addEventListener('click' , function () {
-                programInput.value = this.innerHTML
+                programInput.value = cutHtmlTags(this.innerHTML)
             }) ;
+        }
+
+        function cutHtmlTags(str) {
+            const regex = /(|<([^>]+)>)/ig;
+            return str.replace(regex, "");
         }
     </script>
 @endsection
