@@ -30,7 +30,7 @@ class TeamController extends LayoutController
             $item->employees->each(function ($employee) {
                 if (Storage::disk('public')->exists($employee->picture)) {
                     $existImage = PictureHelper::getExistImage($employee->picture);
-                    $picturePath = 'resize/' . $existImage . '.jpg';
+                    $picturePath = 'resize/' . $existImage . '_128x128' . '.jpg';
 
                     if (Storage::disk('public')->exists($picturePath)) {
                         $existImage = PictureHelper::getExistImage($employee->picture);
