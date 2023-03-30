@@ -20,10 +20,12 @@ class ResizeService
     public static function resize($path, $resizeDisk, $width, $height, string $encode = 'jpg'): string
     {
         $pathArr = explode('/', $path);
-        $existImage = $pathArr[count($pathArr) - 1];
         $suffix = '_' . $width . 'x' . $height;
+        $imageName = $pathArr[count($pathArr) - 1];
+        $existImage = explode('.', $imageName);
+        $existImage = $existImage[0] . $suffix . '.' . $existImage[1];
 
-        if (Storage::exists('public/resize/' . $existImage . $suffix)) {
+        if (Storage::exists('public/resize/' . $existImage)) {
             return 'resize/' . $existImage;
         }
 
