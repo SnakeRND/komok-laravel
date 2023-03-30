@@ -132,19 +132,6 @@
                                                             </div>
                                                         </div>
                                                     @endif
-                                                    @if(session()->has('success'))
-                                                        <div class="grid-x justify-content-center">
-                                                            <div class="cell">
-                                                                <div class="grid-x grid-margin-x grid-padding-y">
-                                                                    <div class="cell">
-                                                                        <div class="callout callout_success">
-                                                                            {{ session()->get('success') }}
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    @endif
                                                     <h3 class="amount__title">Стоимость</h3>
                                                     <div class="amount__content">
                                                         <div class="amount__price">{{ $period->price }} ₽
@@ -484,4 +471,28 @@
         <?php endif; ?>
     @endforeach
 
+    @if(session()->has('success'))
+        <div id="testModalOverlay" class="reveal-overlay" style="display: block;">
+            <div id="testModal" class="reveal medium" data-animation-in="spin-in" data-animation-out="spin-out" role="dialog" aria-hidden="false" data-yeti-box="TeamModal3" data-resize="TeamModal3" style="display: none; top: 46px;" tabindex="-1">
+                <div class="person">
+                    <div class="person__header h3">
+                        Спасибо, наш менеджер скоро свяжется с Вами!
+                    </div>
+                    <div class="person__subheader h5">
+                        На Вашу почту отправлено письмо с анкетой для заполнения.
+                    </div>
+                    <button id="closeTestModal" class="close-button" data-close="" aria-label="Close modal" type="button">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <script>
+            document.getElementById('testModal').style.display = 'block';
+            document.getElementById('closeTestModal').addEventListener('click', function () {
+                document.getElementById('testModal').style.display = 'none';
+                document.getElementById('testModalOverlay').style.display = 'none';
+            })
+        </script>
+    @endif
 @endsection
