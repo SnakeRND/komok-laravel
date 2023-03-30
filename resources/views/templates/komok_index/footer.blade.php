@@ -92,6 +92,9 @@
                 <div class="footer__addres">
                     <div class="footer__addres-item">{{ $settings["site.main_address"]->value}}</div>
                     <div class="footer__addres-item">{{ $settings["site.bank_detalis"]->value }}</div>
+                    <div class="footer__addres-item">Принимаем к оплате:</div>
+                    <div class="footer__addres-item"><img src="images/logo3h.png" alt="payments"></div>
+                    <div class="footer__soc footer__soc-link"><a href="/payment_rules">Правила оплаты</a></div>
                 </div>
             </div>
         </div>

@@ -1,5 +1,17 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AskQuestionController;
+use App\Http\Controllers\FaqController;
+use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OfertaController;
+use App\Http\Controllers\OrderTicketController;
+use App\Http\Controllers\PaymentRulesController;
+use App\Http\Controllers\PlaceController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\ShiftsController;
+use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
 use TCG\Voyager\Facades\Voyager;
 
@@ -14,19 +26,20 @@ use TCG\Voyager\Facades\Voyager;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\HomeController::class, "index"])->name('home');
-Route::get('/gallery', [\App\Http\Controllers\GalleryController::class, "index"])->name('gallery');
-Route::get('/reviews', [\App\Http\Controllers\ReviewController::class, "index"])->name('reviews');
-Route::get('/faq', [\App\Http\Controllers\FaqController::class, "index"])->name('faq');
-Route::get('/team', [\App\Http\Controllers\TeamController::class, "index"])->name('team');
-Route::get('/location', [\App\Http\Controllers\PlaceController::class, "index"])->name('place');
-Route::get('/about', [\App\Http\Controllers\AboutController::class, "index"])->name('about');
-Route::get('/shifts', [\App\Http\Controllers\ShiftsController::class, "index"])->name('shifts');
-Route::get('/oferta', [\App\Http\Controllers\OfertaController::class, "index"])->name('oferta');
+Route::get('/', [HomeController::class, "index"])->name('home');
+Route::get('/gallery', [GalleryController::class, "index"])->name('gallery');
+Route::get('/reviews', [ReviewController::class, "index"])->name('reviews');
+Route::get('/faq', [FaqController::class, "index"])->name('faq');
+Route::get('/team', [TeamController::class, "index"])->name('team');
+Route::get('/location', [PlaceController::class, "index"])->name('place');
+Route::get('/about', [AboutController::class, "index"])->name('about');
+Route::get('/shifts', [ShiftsController::class, "index"])->name('shifts');
+Route::get('/oferta', [OfertaController::class, "index"])->name('oferta');
+Route::get('/payment_rules', [PaymentRulesController::class, "index"])->name('oferta');
 
 /** forms */
-Route::post('/orderTicket', [\App\Http\Controllers\OrderTicketController::class, "store"]);
-Route::post('/askQuestion', [\App\Http\Controllers\AskQuestionController::class, "store"]);
+Route::post('/orderTicket', [OrderTicketController::class, "store"]);
+Route::post('/askQuestion', [AskQuestionController::class, "store"]);
 
 
 Route::group(['prefix' => 'admin'], function () {
