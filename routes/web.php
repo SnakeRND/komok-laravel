@@ -35,7 +35,6 @@ Route::get('/location', [PlaceController::class, "index"])->name('place');
 Route::get('/about', [AboutController::class, "index"])->name('about');
 Route::get('/shifts', [ShiftsController::class, "index"])->name('shifts');
 Route::get('/oferta', [OfertaController::class, "index"])->name('oferta');
-Route::get('/payment_rules', [PaymentRulesController::class, "index"])->name('oferta');
 
 /** forms */
 Route::post('/orderTicket', [OrderTicketController::class, "store"]);
