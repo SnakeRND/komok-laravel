@@ -11,8 +11,8 @@ use Illuminate\Support\Facades\Storage;
 class GalleryService
 {
     const GALLERY_ROOT = '/Галерея';
-    const SHIFT7_12 = '/Галерея/Смены 7-12 лет';
-    const SHIFT13_17 = '/Галерея/Смены 13-17 лет';
+    const SLIDER_SHIFTS_FAMILY = '/Slider-shifts-family';
+    const SLIDER_SHIFTS = '/Slider-shifts';
 
     /**
      * @param array $filter
@@ -49,12 +49,38 @@ class GalleryService
     }
 
     /**
+     * @param int $type
      * @return LengthAwarePaginator
      */
-    public function getShiftImages(): LengthAwarePaginator
+    public function getShiftImages(int $type = 1): LengthAwarePaginator
     {
+        $directory = self::GALLERY_ROOT . self::SLIDER_SHIFTS;
+        if ($type === 2) {
+            $directory = self::GALLERY_ROOT . self::SLIDER_SHIFTS_FAMILY;
+        }
+
         $result = array_slice(
-            Storage::disk('public')->files(self::SHIFT13_17, true),
+            Storage::disk('public')->files($directory, true),
+            -49,
+            49
+        );
+
+        return new LengthAwarePaginator($result, count($result), 7);
+    }
+
+    /**
+     * @param int $type
+     * @return LengthAwarePaginator
+     */
+    public function getGalleryImages(int $type = 1): LengthAwarePaginator
+    {
+        $directory = '/Галерея/Смены 13-17 лет';
+        if ($type === 2) {
+            $directory = '/Галерея/Смены 7-12 лет';
+        }
+
+        $result = array_slice(
+            Storage::disk('public')->files($directory, true),
             -49,
             49
         );

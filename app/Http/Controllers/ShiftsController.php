@@ -109,20 +109,29 @@ class ShiftsController extends LayoutController
         });
         /*        $employees = Employee::query()->whereIn('id', json_decode($data['blocks_on_team'][3]['employees'], true))->get();*/
 
-        $pictures = $gallery->getList();
+        if ($request->has('age') && $request->get('age') === 'family') {
+            $pictures = $gallery->getShiftImages(2);
 
-        if ($request->has('age') && $request->get('age') === 'younger') {
-            $pictures = $pictures->filter(function ($item) {
-                return explode('/', $item)[1] === 'Смены 7-12 лет';
-            });
+            if ($pictures->count() === 0) {
+                $pictures = $gallery->getGalleryImages(2);
+                $pictures = $pictures->filter(function ($item) {
+                    return explode('/', $item)[1] === 'Смены 7-12 лет';
+                });
+            }
+
             if ($pictures->count() > 10) {
                 $pictures = $pictures->random(10);
             }
         } else {
             $pictures = $gallery->getShiftImages();
-            $pictures = $pictures->filter(function ($item) {
-                return explode('/', $item)[1] === 'Смены 13-17 лет';
-            });
+
+            if ($pictures->count() === 0) {
+                $pictures = $gallery->getGalleryImages();
+                $pictures = $pictures->filter(function ($item) {
+                    return explode('/', $item)[1] === 'Смены 13-17 лет';
+                });
+            }
+
             if ($pictures->count() > 10) {
                 $pictures = $pictures->random(10);
             }
