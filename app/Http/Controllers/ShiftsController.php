@@ -118,10 +118,6 @@ class ShiftsController extends LayoutController
                     return explode('/', $item)[1] === 'Смены 7-12 лет';
                 });
             }
-
-            if ($pictures->count() > 10) {
-                $pictures = $pictures->random(10);
-            }
         } else {
             $pictures = $gallery->getShiftImages();
 
@@ -131,20 +127,16 @@ class ShiftsController extends LayoutController
                     return explode('/', $item)[1] === 'Смены 13-17 лет';
                 });
             }
-
-            if ($pictures->count() > 10) {
-                $pictures = $pictures->random(10);
-            }
         }
 
         $pictures = $pictures->map(function ($picture) {
             if (Storage::disk('public')->exists($picture)) {
                 $existImage = PictureHelper::getExistImage($picture);
-                $picturePath = 'resize/' . $existImage . '.jpg';
+                $picturePath = 'resize/' . $existImage . '_470x313' . '.jpg';
 
                 if (Storage::disk('public')->exists($picturePath)) {
                     $existImage = PictureHelper::getExistImage($picture);
-                    $picture = 'resize/' . $existImage . '.jpg';
+                    $picture = 'resize/' . $existImage . '_470x313' . '.jpg';
                 } else {
                     $picture = ResizeService::resize(
                         Storage::path('public/' . $picture),
