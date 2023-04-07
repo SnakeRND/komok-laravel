@@ -112,7 +112,7 @@ class ShiftsController extends LayoutController
         if ($request->has('age') && $request->get('age') === 'family') {
             $pictures = $gallery->getShiftImages(2);
 
-            if ($pictures->count() === 0) {
+            if ($pictures->count() === 0 || $pictures->count() <= 10) {
                 $pictures = $gallery->getGalleryImages(2);
                 $pictures = $pictures->filter(function ($item) {
                     return explode('/', $item)[1] === 'Смены 7-12 лет';
@@ -125,7 +125,7 @@ class ShiftsController extends LayoutController
         } else {
             $pictures = $gallery->getShiftImages();
 
-            if ($pictures->count() === 0) {
+            if ($pictures->count() === 0 || $pictures->count() <= 10) {
                 $pictures = $gallery->getGalleryImages();
                 $pictures = $pictures->filter(function ($item) {
                     return explode('/', $item)[1] === 'Смены 13-17 лет';
