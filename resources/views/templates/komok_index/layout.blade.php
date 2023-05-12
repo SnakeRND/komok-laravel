@@ -20,6 +20,7 @@
     <script defer="defer" src="{{ asset('js/main.js') }}"></script>
     <script defer="defer" src="{{ asset('js/shifts.js') }}"></script>
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    @include('templates.komok_index.yandex_metrika')
 </head>
 <body>
     @include('templates.komok_index.header')
