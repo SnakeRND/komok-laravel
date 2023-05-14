@@ -81,7 +81,7 @@
                                     <div class="cell large-22">
                                         <textarea name="text" rows="5" cols="33" placeholder="Поле для текста">{{ old('text') }}</textarea>
                                     </div>
-                                    <div class="cell large-22 question__button">
+                                    <div class="cell large-22 question__button question__button_small-center">
 
 
                                         <button class="button" type="submit">Отправить</button>

@@ -157,10 +157,10 @@
                     </div>
                     <div class="text-align-center">
                         <div>
-                            <a class="button button_hollow" href="/shifts?age=younger">Смены 7-12 лет</a>
+                            <a class="button button_hollow" href="https://xn--e1akkdfp.com/" target="_blank">Проект.ком 7-17 лет </a>
                         </div>
                         <div>
-                            <a class="button" href="/shifts">Смены 13-17 лет</a>
+                            <a class="button" href="/shifts">KOMOK CAMP 12-17 лет</a>
                         </div>
                     </div>
                 </div>
