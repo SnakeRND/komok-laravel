@@ -19,10 +19,8 @@ class PlaceController extends LayoutController
             if ($item->pictures) {
                 $item->pictures = json_decode($item->pictures, true);
                 $item->pictures = collect($item->pictures)->map(function($picPath) {
-                    if (!Storage::disk('public')->exists($picPath)) {
+                    if (!Storage::disk('public')->exists($picPath))
                         return false;
-                    }
-
                     return ResizeService::resize(
                         Storage::path('public/' . $picPath),
                         'public',
