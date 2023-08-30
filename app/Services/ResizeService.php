@@ -29,11 +29,15 @@ class ResizeService
             return 'resize/' . $existImage;
         }
 
-        $img = Image::make($path);
-        $resize = $img->fit($width, $height)->encode($encode);
-        $resizePath = "resize/{$img->filename}{$suffix}.jpg";
-        $resize->save(Storage::path($resizeDisk . '/' . $resizePath));
+        if (mime_content_type($path) !== 'text/plain') {
+            $img = Image::make($path);
+            $resize = $img->fit($width, $height)->encode($encode);
+            $resizePath = "resize/{$img->filename}{$suffix}.jpg";
+            $resize->save(Storage::path($resizeDisk . '/' . $resizePath));
 
-        return $resizePath;
+            return $resizePath;
+        } else {
+            return $path;
+        }
     }
 }
