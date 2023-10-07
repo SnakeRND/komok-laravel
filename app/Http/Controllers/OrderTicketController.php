@@ -27,7 +27,7 @@ class OrderTicketController extends Controller
             'mail.required_without' => 'Необходимо заполнить телефон или почту',
         ]);
 
-        $hasUrl = preg_match_all("/(https?:\/\/|http:\/\/|www\.)((?![.,?!;:()]*(\s|$))[^\s]){2,}/", $request->all()['name']);
+        $hasUrl = preg_match_all("/(https?:\/\/|http:\/\/|www\.)((?![.,?!;:()]*(\s|$))[^\s]){2,}/", $request->get('name'));
 
         if ($validator->fails() || $hasUrl)
             return Redirect::to(URL::previous() . "#orderTicket")
