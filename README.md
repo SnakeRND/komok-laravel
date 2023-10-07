@@ -26,4 +26,4 @@
 
 <p><strong>дефолт.админ</strong></p>
 l: admin@admin.com
-p: password
+p: k3c5m6Q12
